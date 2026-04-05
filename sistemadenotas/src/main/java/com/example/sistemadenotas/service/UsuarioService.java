@@ -95,7 +95,7 @@ public class UsuarioService {
         // ✅ Inserta fila en la tabla correcta
         switch (Rol.valueOf(rol)) {
             case ESTUDIANTE -> entityManager.createNativeQuery(
-                "INSERT INTO estudiantes (id_usuario, programa_academico) VALUES (:id, null)")
+                "INSERT INTO estudiantes (id_usuario, programa_id) VALUES (:id, null)")
                 .setParameter("id", id).executeUpdate();
             case PROFESOR -> entityManager.createNativeQuery(
                 "INSERT INTO profesores (id_usuario, titulo, especializacion) VALUES (:id, null, null)")
