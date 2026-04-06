@@ -1,5 +1,6 @@
 package com.example.sistemadenotas.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -42,4 +43,9 @@ public class EstudianteController {
             @RequestBody Map<String, String> body) {
         return ResponseEntity.ok(estudianteService.actualizarPerfil(id, body));
     }
+
+    @GetMapping
+    public ResponseEntity<List<Estudiante>> listarTodos() {
+    return ResponseEntity.ok(estudianteService.listarTodos());
+}
 }

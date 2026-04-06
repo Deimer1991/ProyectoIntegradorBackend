@@ -1,5 +1,6 @@
 package com.example.sistemadenotas.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -64,4 +65,8 @@ public class ProfesorService {
 
         return profesorRepository.save(profesor);
     }
+
+    public List<Profesor> listarTodos() {
+    return profesorRepository.findAll();
+}
 }
