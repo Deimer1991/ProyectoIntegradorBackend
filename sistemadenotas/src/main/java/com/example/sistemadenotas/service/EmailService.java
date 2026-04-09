@@ -101,4 +101,30 @@ public class EmailService {
 
         mailSender.send(mensaje);
     }
+
+    public void enviarCorreoRecuperacion(Usuario usuario, String token) {
+    String nombres = usuario.getNombreCompleto().getNombres();
+    String apellidos = usuario.getNombreCompleto().getApellidos();
+    String link = frontendUrl + "/recuperar-contrasena/" + token;
+
+    SimpleMailMessage mensaje = new SimpleMailMessage();
+    mensaje.setTo(usuario.getCorreo());
+    mensaje.setSubject("Recuperación de contraseña — Sistema de Notas");
+    mensaje.setText(String.format("""
+        Hola %s %s,
+
+        Recibimos una solicitud para restablecer la contraseña de tu cuenta.
+
+        Haz clic en el siguiente enlace para crear una nueva contraseña:
+
+        %s
+
+        Este enlace es válido por 1 hora. Si no solicitaste este cambio, ignora este correo.
+
+        Atentamente,
+        El equipo del Sistema de Notas
+        """, nombres, apellidos, link));
+
+    mailSender.send(mensaje);
+}
 }

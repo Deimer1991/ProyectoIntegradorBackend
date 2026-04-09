@@ -87,6 +87,11 @@ public class Usuario {
     @Column(name = "registro")
     private Registro registro;
 
-    
+    @Column(name = "token_recuperacion")
+    private String tokenRecuperacion;
 
+    @Column(name = "expiracion_token_recuperacion")
+    private LocalDateTime expiracionTokenRecuperacion;
+
+    
 }
