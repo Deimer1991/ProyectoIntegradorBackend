@@ -1,16 +1,18 @@
 package com.example.sistemadenotas.service;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
 import com.example.sistemadenotas.model.entity.Grupo;
 import com.example.sistemadenotas.model.entity.Materia;
 import com.example.sistemadenotas.model.entity.Profesor;
 import com.example.sistemadenotas.repository.GrupoRepository;
 import com.example.sistemadenotas.repository.MateriaRepository;
 import com.example.sistemadenotas.repository.ProfesorRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +33,11 @@ public class GrupoService {
     public List<Grupo> listarPorProfesor(Long profesorId) {
         return grupoRepository.findByProfesorId(profesorId);
     }
+
+    public Grupo obtenerPorId(Long id) {
+    return grupoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Grupo no encontrado"));
+}
 
     public Grupo crear(Map<String, String> body) {
         Materia materia = materiaRepository.findById(Long.parseLong(body.get("materiaId")))
@@ -81,4 +88,11 @@ public class GrupoService {
         grupo.setEstado("INACTIVO");
         grupoRepository.save(grupo);
     }
+
+    public Grupo activar(Long id) {
+    Grupo grupo = grupoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Grupo no encontrado"));
+    grupo.setEstado("ACTIVO");
+    return grupoRepository.save(grupo);
+}
 }

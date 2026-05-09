@@ -1,13 +1,22 @@
 package com.example.sistemadenotas.controller;
 
-import com.example.sistemadenotas.model.entity.Grupo;
-import com.example.sistemadenotas.service.GrupoService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.sistemadenotas.model.entity.Grupo;
+import com.example.sistemadenotas.service.GrupoService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/grupos")
@@ -31,6 +40,11 @@ public class GrupoController {
         return ResponseEntity.ok(grupoService.listarPorProfesor(profesorId));
     }
 
+    @GetMapping("/{id}")
+public ResponseEntity<Grupo> obtenerPorId(@PathVariable Long id) {
+    return ResponseEntity.ok(grupoService.obtenerPorId(id));
+}
+
     @PostMapping
     public ResponseEntity<Grupo> crear(@RequestBody Map<String, String> body) {
         return ResponseEntity.ok(grupoService.crear(body));
@@ -48,4 +62,9 @@ public class GrupoController {
         grupoService.desactivar(id);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/{id}/activar")
+public ResponseEntity<Grupo> activar(@PathVariable Long id) {
+    return ResponseEntity.ok(grupoService.activar(id));
+}
 }
