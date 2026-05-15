@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.sistemadenotas.model.dto.UsuarioDTO;
 import com.example.sistemadenotas.model.entity.Usuario;
 import com.example.sistemadenotas.service.UsuarioService;
 
@@ -30,7 +31,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listar() {
+    public ResponseEntity<List<UsuarioDTO>> listar() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 

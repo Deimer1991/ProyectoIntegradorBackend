@@ -2,10 +2,13 @@ package com.example.sistemadenotas.service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.sistemadenotas.model.dto.UsuarioDTO;
+import com.example.sistemadenotas.model.entity.Estudiante;
 import com.example.sistemadenotas.model.entity.Usuario;
 import com.example.sistemadenotas.model.enums.EnvioCorreo;
 import com.example.sistemadenotas.model.enums.Estado;
@@ -71,8 +74,21 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public List<Usuario> listarTodos() {
-        return usuarioRepository.findAll();
+    public List<UsuarioDTO> listarTodos() {
+        return usuarioRepository.findAll().stream()
+            .map(u -> new UsuarioDTO(
+                u.getId(),
+                u.getNombreCompleto() != null ? u.getNombreCompleto().getNombres() : null,
+                u.getNombreCompleto() != null ? u.getNombreCompleto().getApellidos() : null,
+                u.getCorreo(),
+                u instanceof Estudiante e && e.getPrograma() != null
+                    ? e.getPrograma().getNombre() : null,
+                u.getRol() != null ? u.getRol().name() : null,
+                u.getEstado() != null ? u.getEstado().name() : null,
+                u.getEnvioCorreo() != null ? u.getEnvioCorreo().name() : null,
+                u.getRegistro() != null ? u.getRegistro().name() : null
+            ))
+            .collect(Collectors.toList());
     }
 
     @Transactional
