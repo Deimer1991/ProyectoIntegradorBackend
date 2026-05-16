@@ -4,7 +4,7 @@ services:
     runtime: docker
     repo: https://github.com/tu-usuario/sistema-notas-java
     rootDir: sistemadenotas
-    dockerfilePath: Dockerfile
+    dockerfilePath: sistemadenotas/Dockerfile
     envVars:
       - key: DB_URL
         value: jdbc:postgresql://db.prisma.io:5432/postgres?sslmode=require
