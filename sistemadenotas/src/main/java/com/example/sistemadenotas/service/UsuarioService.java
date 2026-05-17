@@ -35,12 +35,12 @@ public class UsuarioService {
     public Usuario guardar(Usuario usuario) {
 
         // ✅ Valida correo duplicado SIEMPRE
-        if (usuarioRepository.findByCorreo(usuario.getCorreo()).isPresent()) {
+        if (usuarioRepository.existsByCorreo(usuario.getCorreo())) {
             throw new RuntimeException("Ya existe un usuario con ese correo");
         }
 
         // ✅ Valida documento duplicado SIEMPRE
-        if (usuarioRepository.findByDocumento(usuario.getDocumento()).isPresent()) {
+        if (usuarioRepository.existsByDocumento(usuario.getDocumento())) {
             throw new RuntimeException("Ya existe un usuario con ese número de documento");
         }
 
