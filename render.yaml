@@ -21,6 +21,6 @@ services:
       - key: SPRING_MAIL_HOST
         value: smtp.sendgrid.net
       - key: SPRING_MAIL_PORT
-        value: "587"
+        value: "2525"
       - key: SPRING_MAIL_USERNAME
         value: apikey
