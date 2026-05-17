@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.example.sistemadenotas.model.entity.Administrador;
+import com.example.sistemadenotas.model.enums.Estado;
 import com.example.sistemadenotas.model.enums.Registro;
 import com.example.sistemadenotas.repository.AdministradorRepository;
 import com.example.sistemadenotas.repository.UsuarioRepository;
@@ -28,6 +29,7 @@ public class AdministradorService {
         Administrador guardado = administradorRepository.save(administrador);
 
         usuarioRepository.findById(id).ifPresent(u -> {
+            u.setEstado(Estado.ACTIVO);
             u.setRegistro(Registro.COMPLETO);
             u.setTokenRegistro(null);
             usuarioRepository.save(u);

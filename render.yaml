@@ -16,11 +16,11 @@ services:
         value: "86400000"
       - key: APP_FRONTEND_URL
         value: https://proyectointegradorfrontend.onrender.com
-      - key: SPRING_MAIL_USERNAME
-        value: deimer.yav@gmail.com
-      - key: SPRING_MAIL_PASSWORD
-        value: ssad kuhd zjud nnrn
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: SPRING_MAIL_HOST
+        value: smtp.sendgrid.net
       - key: SPRING_MAIL_PORT
-        value: "465"
-      - key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE
-        value: "true"
+        value: "587"
+      - key: SPRING_MAIL_USERNAME
+        value: apikey

@@ -100,7 +100,7 @@ public class UsuarioService {
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         usuario.setRol(Rol.valueOf(rol));
-        usuario.setEstado(Estado.ACTIVO);
+        usuario.setRegistro(Registro.PENDIENTE);
         usuarioRepository.save(usuario);
 
         // ✅ Limpia filas hijas anteriores para evitar inconsistencias

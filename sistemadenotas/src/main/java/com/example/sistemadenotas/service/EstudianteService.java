@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.sistemadenotas.model.entity.Estudiante;
 import com.example.sistemadenotas.model.entity.ProgramaAcademico;
+import com.example.sistemadenotas.model.enums.Estado;
 import com.example.sistemadenotas.model.enums.Registro;
 import com.example.sistemadenotas.repository.EstudianteRepository;
 import com.example.sistemadenotas.repository.ProgramaAcademicoRepository;
@@ -34,6 +35,7 @@ public class EstudianteService {
         Estudiante guardado = estudianteRepository.save(estudiante);
 
         usuarioRepository.findById(id).ifPresent(u -> {
+            u.setEstado(Estado.ACTIVO);
             u.setRegistro(Registro.COMPLETO);
             u.setTokenRegistro(null);
             usuarioRepository.save(u);
