@@ -12,6 +12,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     Optional<Usuario> findByTokenRegistro(String tokenRegistro);
     Optional<Usuario> findByTokenRecuperacion(String tokenRecuperacion);
+    Optional<Usuario> findByCorreo(String correo);
+    Optional<Usuario> findByDocumento(String documento);
 
     boolean existsByCorreo(String correo);
     boolean existsByDocumento(String documento);
