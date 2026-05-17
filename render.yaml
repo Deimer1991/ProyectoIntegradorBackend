@@ -20,3 +20,7 @@ services:
         value: deimer.yav@gmail.com
       - key: SPRING_MAIL_PASSWORD
         value: ssad kuhd zjud nnrn
+      - key: SPRING_MAIL_PORT
+        value: "465"
+      - key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE
+        value: "true"
