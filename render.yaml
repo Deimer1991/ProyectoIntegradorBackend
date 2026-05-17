@@ -15,7 +15,7 @@ services:
       - key: APP_JWT_EXPIRATION
         value: "86400000"
       - key: APP_FRONTEND_URL
-        value: https://sistema-notas-frontend.onrender.com
+        value: https://proyectointegradorfrontend.onrender.com
       - key: SPRING_MAIL_USERNAME
         value: deimer.yav@gmail.com
       - key: SPRING_MAIL_PASSWORD
