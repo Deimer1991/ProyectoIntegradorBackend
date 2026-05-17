@@ -95,6 +95,7 @@ public class EmailService {
         );
 
         SimpleMailMessage mensaje = new SimpleMailMessage();
+        mensaje.setFrom("deimer.yav@gmail.com");
         mensaje.setTo(correo);
         mensaje.setSubject(asunto);
         mensaje.setText(cuerpo);
@@ -108,6 +109,7 @@ public class EmailService {
     String link = frontendUrl + "/recuperar-contrasena/" + token;
 
     SimpleMailMessage mensaje = new SimpleMailMessage();
+    mensaje.setFrom("deimer.yav@gmail.com");
     mensaje.setTo(usuario.getCorreo());
     mensaje.setSubject("Recuperación de contraseña — Sistema de Notas");
     mensaje.setText(String.format("""
