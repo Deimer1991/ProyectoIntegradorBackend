@@ -34,7 +34,7 @@ public class UsuarioService {
     @Transactional
     public Usuario guardar(Usuario usuario) {
 
-        // ✅ Valida correo duplicado SIEMPRE (antes estaba dentro del if)
+        // ✅ Valida correo duplicado SIEMPRE
         if (usuarioRepository.findByCorreo(usuario.getCorreo()).isPresent()) {
             throw new RuntimeException("Ya existe un usuario con ese correo");
         }
@@ -44,11 +44,14 @@ public class UsuarioService {
             throw new RuntimeException("Ya existe un usuario con ese número de documento");
         }
 
+        // ✅ Asigna valores iniciales para TODOS los usuarios
+        usuario.setEstado(Estado.ACTIVO);
+        usuario.setEnvioCorreo(EnvioCorreo.NO_ENVIADO);
+        usuario.setRegistro(Registro.INCOMPLETO);
+
         // ✅ Si es el primer usuario → SUPER_ADMIN automático
         if (usuarioRepository.count() == 0) {
             usuario.setRol(Rol.SUPER_ADMIN);
-            usuario.setEstado(Estado.ACTIVO);
-            usuario.setRegistro(Registro.PENDIENTE);
 
             Usuario guardado = usuarioRepository.save(usuario);
 
@@ -62,9 +65,9 @@ public class UsuarioService {
             String token = UUID.randomUUID().toString();
             guardado.setTokenRegistro(token);
             guardado.setEnvioCorreo(EnvioCorreo.ENVIADO);
+            guardado.setRegistro(Registro.PENDIENTE);
             usuarioRepository.save(guardado);
 
-            // ✅ Usa el nuevo método con usuario completo
             emailService.enviarLinkFormulario(guardado, token);
 
             return guardado;
